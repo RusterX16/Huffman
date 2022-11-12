@@ -1,17 +1,37 @@
 #include <stdio.h>
 
+typedef struct
+{
+    char char_value;
+    int frequence;
+} Noeud;
+
+struct Arbre {
+    char char_value;
+    unsigned frequence;
+    struct Noeud *haut, *bas;
+};
+
+
+
 void lecture_fichier(){
     FILE* fichier = NULL;
     fichier = fopen("C:\\Users\\Edvan\\CLionProjects\\ProjetC\\fichier.txt", "r");
     if (fichier != NULL){
         char caractereActuel = fgetc(fichier);
         while (caractereActuel != EOF){
+
             printf("%c", caractereActuel);
             caractereActuel = fgetc(fichier);
         }
         fclose(fichier);
     }
 }
+// FILE *out = fopen("output.txt", "w");
+// fclose(out);
+
+
+
 int main() {
     lecture_fichier();
     return 0;
