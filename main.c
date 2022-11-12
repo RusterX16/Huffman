@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-// Structure représentant
+// Structure représentant un noeud de l'arbre
+// l'arbre sera une accumulation de noeuds
 struct Noeud {
     char char_value;
     unsigned frequence;
