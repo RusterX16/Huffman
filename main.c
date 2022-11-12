@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-struct Noeud {
+struct Arbre {
     char char_value;
     unsigned frequence;
     struct Arbre *haut, *bas;
