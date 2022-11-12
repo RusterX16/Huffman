@@ -1,9 +1,10 @@
 #include <stdio.h>
 
-struct Arbre {
+// Structure représentant
+struct Noeud {
     char char_value;
     unsigned frequence;
-    struct Arbre *haut, *bas;
+    struct Noeud *haut, *bas;
 };
 
 
