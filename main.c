@@ -8,6 +8,8 @@ struct Noeud {
     struct Noeud *haut, *bas;
 };
 
+// Récupération du fichier donné par l'utilisateur
+
 void lecture_fichier() {
     FILE *fichier = NULL;
     fichier = fopen("../fichier.txt", "r");
@@ -29,8 +31,6 @@ int main() {
     lecture_fichier();
     return 0;
 }
-
-// Récupération du fichier donné par l'utilisateur
 
 // Extraction des octets du fichier
 
