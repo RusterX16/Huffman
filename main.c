@@ -1,22 +1,21 @@
 #include <stdio.h>
 
-// Structure représentant un noeud de l'arbre
-// l'arbre sera une accumulation de noeuds
+// Structure représentant un nœud de l'arbre
+// l'arbre sera une accumulation de nœuds
 struct Noeud {
     char char_value;
     unsigned frequence;
     struct Noeud *haut, *bas;
 };
 
+void lecture_fichier() {
+    FILE *fichier = NULL;
+    fichier = fopen("../fichier.txt", "r");
 
-
-void lecture_fichier(){
-    FILE* fichier = NULL;
-    fichier = fopen("C:\\Users\\Edvan\\CLionProjects\\ProjetC\\fichier.txt", "r");
-    if (fichier != NULL){
+    if (fichier != NULL) {
         char caractereActuel = fgetc(fichier);
-        while (caractereActuel != EOF){
 
+        while (caractereActuel != EOF) {
             printf("%c", caractereActuel);
             caractereActuel = fgetc(fichier);
         }
@@ -25,8 +24,6 @@ void lecture_fichier(){
 }
 // FILE *out = fopen("output.txt", "w");
 // fclose(out);
-
-
 
 int main() {
     lecture_fichier();
@@ -39,17 +36,17 @@ int main() {
 
 // Création d'une liste avec tous les caractères différents
 
-// Pour chacun de ces charactères
-    // Compter le nombre d'occurence
+// Pour chacun de ces caractères
+// Compter le nombre d'occurrences
 
-// Associer chaque charactère avec son nombre d'occurences
+// Associer chaque caractère avec son nombre d'occurrences
 
 // Création d'un arbre binaire pour chaque duo Valeur / Fréquence
 
-// Tant qu'il ni a pas de noeud final
-    // On fusionne les arbres binaire avec les plus petites fréquences
+// Tant qu'il n'a pas de nœud final
+// On fusionne les arbres binaires avec les plus petites fréquences
 
-// On créer un code de Huffman pour réécrire le fichier de façon compréssé
+// On crée un code de Huffman pour réécrire le fichier de façon compressé
 
 // On retourne le code de Huffman
 // On retourne le fichier compressé
