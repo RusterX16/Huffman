@@ -3,23 +3,23 @@
 // Structure représentant un noeud de l'arbre
 // l'arbre sera une accumulation de noeuds
 struct Noeud {
-    char char_value;
+    char charValue;
     unsigned frequence;
     struct Noeud *haut, *bas;
 };
 
-
-
-void lecture_fichier(){
+void lectureFichier(){
     FILE* fichier = NULL;
-    fichier = fopen("C:\\Users\\Edvan\\CLionProjects\\ProjetC\\fichier.txt", "r");
-    if (fichier != NULL){
-        char caractereActuel = fgetc(fichier);
-        while (caractereActuel != EOF){
-
-            printf("%c", caractereActuel);
-            caractereActuel = fgetc(fichier);
-        }
+    int caractereActuel = 0;
+    fichier = fopen("test.txt", "r");
+    if (fichier != NULL)
+    {
+        // Boucle de lecture des caractères un à un
+        do
+        {
+            caractereActuel = fgetc(fichier); // On lit le caractère
+            printf("%c", caractereActuel); // On l'affiche
+        } while (caractereActuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
         fclose(fichier);
     }
 }
@@ -29,7 +29,7 @@ void lecture_fichier(){
 
 
 int main() {
-    lecture_fichier();
+    lectureFichier();
     return 0;
 }
 
