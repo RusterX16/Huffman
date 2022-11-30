@@ -35,8 +35,6 @@ Couple * get_couple_list(const char * char_list, unsigned * char_frequency);
 
 Noeud * get_noeud_list(Couple * couple_list);
 
-Noeud * fusion_noeud(Noeud * noeud_list, unsigned noeud_list_length);
-
 int count_noeud(Noeud * noeud_list);
 
 // ---------------------------------------------------------------------------
@@ -127,106 +125,6 @@ Noeud * get_noeud_list(Couple * couple_list) {
     noeud_list[i] . haut = NULL;
     noeud_list[i] . bas = NULL;
     return noeud_list;
-}
-
-Noeud * node_fusion(Noeud * noeud_list, unsigned noeud_list_length) {
-    // Return if the size is less or equals than 1
-    if (noeud_list_length <= 1) {
-        return noeud_list;
-    }
-
-    // Find the two lowest nodes
-    Noeud * lowest_node_1 = noeud_list;
-    Noeud * lowest_node_2 = noeud_list + 1;
-    if (lowest_node_1 -> couple -> frequence > lowest_node_2 -> couple -> frequence) {
-        lowest_node_1 = noeud_list + 1;
-        lowest_node_2 = noeud_list;
-    }
-
-    // Instantiate the new node couple
-    Couple * new_couple = malloc(sizeof(Couple));
-    new_couple -> charValue = '\0';
-    new_couple -> frequence = lowest_node_1 -> couple -> frequence + lowest_node_2 -> couple -> frequence;
-
-    // Instantiate the new node
-    Noeud * new_node = malloc(sizeof(Noeud));
-    new_node -> couple = new_couple;
-    new_node -> haut = (struct Noeud *) lowest_node_1;
-    new_node -> bas = (struct Noeud *) lowest_node_2;
-
-    // Delete the two lowest nodes couples
-    free(lowest_node_1 -> couple);
-    free(lowest_node_2 -> couple);
-
-    // Delete the two lowest nodes
-    free(lowest_node_1);
-    free(lowest_node_2);
-
-    // Create a new list of nodes
-    Noeud * new_noeud_list = malloc(sizeof(Noeud) * (noeud_list_length - 1));
-    int i = 0;
-    int j = 0;
-    while (i < noeud_list_length) {
-        if (noeud_list != lowest_node_1 && noeud_list != lowest_node_2) {
-            new_noeud_list[j] = noeud_list[i];
-            j++;
-        }
-        i++;
-    }
-    new_noeud_list[j] = * new_node;
-    j++;
-    new_noeud_list[j] . couple = NULL;
-    new_noeud_list[j] . haut = NULL;
-    new_noeud_list[j] . bas = NULL;
-
-    // Recursion call
-    return node_fusion(new_node, noeud_list_length - 1);
-}
-
-Noeud * fusion_noeud(Noeud * noeud_list, unsigned noeud_list_length) {
-    // verification de la taille de la liste
-    if (noeud_list_length <= 1) {
-        return noeud_list;
-    }
-    // recherche des deux couples de nœud avec les plus petites fréquences
-    int min1 = 0;
-    int min2 = 1;
-    if (noeud_list[min1] . couple -> frequence > noeud_list[min2] . couple -> frequence) {
-        int tmp = min1;
-        min1 = min2;
-        min2 = tmp;
-    }
-    for (int i = 2; i < noeud_list_length; i++) {
-        if (noeud_list[i] . couple -> frequence < noeud_list[min1] . couple -> frequence) {
-            min2 = min1;
-            min1 = i;
-        } else if (noeud_list[i] . couple -> frequence < noeud_list[min2] . couple -> frequence) {
-            min2 = i;
-        }
-    }
-    // creation du nouveau couple
-    Couple * new_couple = malloc(sizeof(Couple));
-    new_couple -> charValue = '\0';
-    new_couple -> frequence = noeud_list[min1] . couple -> frequence + noeud_list[min2] . couple -> frequence;
-    // creation du nouveau nœud
-    Noeud * new_noeud = malloc(sizeof(Noeud));
-    new_noeud -> couple = new_couple;
-    new_noeud -> haut = (struct Noeud *) & noeud_list[min1];
-    new_noeud -> bas = (struct Noeud *) & noeud_list[min2];
-    // suppression des deux couples de nœud les plus petits
-    for (int i = min2; i < noeud_list_length - 1; i++) {
-        noeud_list[i] = noeud_list[i + 1];
-    }
-    for (int i = min1; i < noeud_list_length - 2; i++) {
-        noeud_list[i] = noeud_list[i + 1];
-    }
-    // ajout du nouveau nœud
-    noeud_list[noeud_list_length - 2] = * new_noeud;
-    noeud_list[noeud_list_length - 1] . couple = NULL;
-    noeud_list[noeud_list_length - 1] . haut = NULL;
-    noeud_list[noeud_list_length - 1] . bas = NULL;
-    // appel récursif
-    return fusion_noeud(noeud_list, noeud_list_length - 1);
 }
 
 // fonction qui compte le nombre de nœuds dans une liste de nœud
